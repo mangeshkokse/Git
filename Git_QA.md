@@ -167,3 +167,128 @@ Before making commits to the changes done, the developer is given provision to f
 - You can add all changes at once using `git add .` command.
 - You can add files one by one specifically using `git add <file_name>` command.
 - You can add contents of a particular folder by using `git add /<folder_name>/` command.
+
+# Q. What is Squash.
+In Git, "squash" means combining multiple commits into a single commit. This process helps tidy up commit history by merging the changes of several commits into one, making the history cleaner and easier to understand.
+
+# Q. What has to be run to squash multiple commits (last N) into a single commit?
+To squash the last N commits into a single commit in Git, follow these steps:
+1. **Run an interactive rebase**: Use the following command, replacing `N` with the number of commits you want to squash:
+```bash
+git rebase -i HEAD~N
+```
+2. **Mark commits to squash**: This opens an editor with a list of the last `N` commits. The first commit will be marked as `pick`, and for the rest, change `pick` to `squash` (or s for short). This combines those commits into the first one.
+3. **Edit the commit message (optional)**: After squashing, Git will ask you to edit the commit message. You can either keep the original commit messages or rewrite them into a single message.
+4. **Finalize the rebase**: Once you save and close the editor, Git will squash the commits into one.
+5. **Force-push the changes (if necessary)**: If you're working on a remote branch, you may need to force-push the changes:
+```bash
+git push --force
+```
+This will combine the last N commits into a single.
+
+# Q. How would you recover a branch that has already pushed changes in the central repository but has been accidentally deleted from every team member’s local machines?
+To recover a branch that has been pushed to a central repository but deleted locally, follow these 
+steps:
+### 1. Fetch all branches from the remote:
+```bash
+git fetch origin
+```
+### 2. List all remote branches to find the deleted branch:
+```bash
+git branch -r
+```
+Look for the branch in the list (e.g., `origin/branch-name`).
+
+### 3. Restore the deleted branch locally: 
+Once you identify the branch, check it out from the remote:
+```bash
+git checkout -b branch-name origin/branch-name
+```
+This will recreate the branch on your local machine, and you can now continue working with it.
+
+# Q. Can you tell something about `git reflog`?
+`git reflog` (reference log) is a Git command that tracks and records changes to the `HEAD` and branch references in your repository. It allows you to see a history of all the actions that have moved or updated your `HEAD` pointer, such as commits, checkouts, rebases, resets, or merges.
+
+**Key points about `git reflog`**:
+- **Local history**: `git reflog` is stored locally, and it doesn't get pushed to the remote repository. It's useful for recovering lost commits or branches that you might have deleted accidentally.
+- **Recovery tool**: If you reset a branch or lose a commit, you can use git reflog to find the commit hash and recover it.
+- **Usage**:
+```bash
+git reflog
+```
+This command shows you a list of recent changes to the `HEAD`, including commit hashes, actions, and messages.
+- **Example output**:
+```bash
+c3d5e2a HEAD@{0}: reset: moving to HEAD^
+91a5b89 HEAD@{1}: commit: added a new feature
+e8c29f1 HEAD@{2}: checkout: moving from main to feature-branch
+```
+By using `git reflog`, you can identify where your commits or changes were lost and recover them by checking out or resetting to the relevant commit hash.
+
+# Q. what is the stash in Git
+In Git, a stash is a temporary storage area where you can save your uncommitted changes (both tracked and untracked files) without committing them to the repository. This allows you to clean your working directory and switch to a different task or branch, while keeping your current changes saved for later use.
+
+# Q. What does `git annotate` command do?
+The `git annotate` command, also known as `git blame`, shows line-by-line details about who last modified each line in a file, along with the corresponding commit. It's useful for tracking changes and understanding the history of a file.
+
+When you run `git annotate` (or `git blame`), it displays:
+1. The commit hash that introduced each line.
+2. The author of the change.
+3. The timestamp of the change.
+4. The actual content of each line.
+
+Example usage:
+```bash
+git annotate <filename>
+```
+or
+
+```bash
+git blame <filename>
+```
+This will show you, for each line in the file, who last modified it, in which commit, and when. It's commonly used to trace the history of specific code changes.
+
+# Q. What is the difference between git stash apply vs git stash pop command?
+The difference between `git stash apply` and `git stash pop` lies in how they handle the stash after applying the changes:
+1. `git stash apply`:
+- This command applies the stashed changes to your working directory but keeps the stash intact.
+- The stash remains available for future use.
+- Use it if you want to apply the changes without removing the stash.
+```bash
+git stash apply
+```
+2. `git stash pop`:
+- This command applies the stashed changes to your working directory and removes the stash after applying it.
+- It's a combination of `git stash apply` and `git stash drop` (which deletes the stash).
+- Use it if you want to apply the changes and no longer need to keep the stash.
+```bash
+git stash pop
+```
+
+# Q. Difference between `git pull` and `git fetch`
+
+The difference between `git pull` and `git fetch` lies in how they handle retrieving changes from a remote repository and integrating them into your local repository:
+
+## 1. `git fetch`:
+- **Fetches remote changes**: It downloads new commits, branches, and tags from the remote repository **without merging** them into your local branches.
+- **Local state remains unchanged**: It only updates the remote-tracking branches (like `origin/main`) but doesn't affect your current working directory or the local branches.
+- **Manual merge required**: After fetching, you need to manually merge the fetched changes into your local branch if desired (using `git merge`).
+- **Usage**:
+  ```bash
+  git fetch
+  ```
+  - **Typical workflow**: Fetching is used when you want to see what changes exist on the remote repository before deciding to integrate them.
+## 2. `git pull`:
+- **Fetches and merges**: It performs a `git fetch` followed by a merge of the fetched changes into your current local branch.
+- **Immediate integration**: After downloading the changes, it automatically attempts to merge the remote branch into your local branch.
+- **Potential conflicts**: Since it merges the changes right away, conflicts may arise that you need to resolve during the pull process.
+```bash
+git pull
+```
+- **Typical workflow**: Pulling is used when you want to immediately bring your local branch up to date with the remote branch.
+
+### Summary:
+- `git fetch`: Only downloads changes; no changes to your local working directory or branch.
+- `git pull`: Downloads and merges changes into your current local branch.
+
+
