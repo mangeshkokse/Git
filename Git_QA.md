@@ -184,4 +184,61 @@ This will show you, for each line in the file, who last modified it, in which co
 
 2. `git pull` - Download + apply changes
    - It does both: fetch + merge in one step.
+   - It updates your current branch with remote changes immediately.
+   - Your branch is now up to date with the remote.
 
+## Q. What is the diff betn git merge and git rebase ?
+Think of Branches Like Two Lanes of Work, You're working on a feature branch, and there's also the main branch. Now you want to bring changes from main into your feature branch. 
+
+**You have two ways:**
+1. git merge -  (Combine, keep history)
+   - Merges the changes from one branch into another and creates a merge commit.
+   - Keeps full history of both branches (shows where they diverged).
+   ```bash
+   git checkout feature
+   git merge main
+   ```
+2. git rebase - (Rewrite history, linear)   
+   - What it does: Moves your commits on top of another branch as if they were written after it.
+   - Creates a cleaner, linear history.
+   ```bash
+   git checkout feature
+   git rebase main
+   ```
+
+## Q. what is the command to fixed the broken commit ?
+- A "broken commit" refers to a commit that introduces issues or mistakes into the codebase. These issues could be anything from a bug, incorrect logic, or a failed test to incorrect commit messages or missing files.
+
+```bash
+git commit --amend
+```
+- It works like 
+```bash
+git add <file>
+git commit --amend
+```
+- Then, Replace the commit entirely:
+```bash
+git commit --amend -m "New fixed message"
+```
+
+## Q. Git commands
+
+1. git init
+Initializes a new Git repository in the current directory.
+Example: git init
+2. git clone
+Copies a remote repository to the local machine.
+Example: git clone https://github.com/user/repo.git
+3. git status
+Displays the state of the working directory and staging area.
+Example: git status
+4. git add
+Adds changes to the staging area.
+Example: git add file.txt
+5. git commit
+Records changes to the repository.
+Example: git commit -m "Initial commit"
+6. git config
+Configures user settings, such as name and email.
+Example: git config --global user.name "Your Name"
