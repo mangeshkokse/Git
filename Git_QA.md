@@ -135,11 +135,8 @@ A **conflict** in Git occurs when **two or more changes** are made to the same p
 
 Conflicts need manual intervention to resolve so that Git can successfully complete the merge or rebase process.
 
-## Q. What does git status command do?
-- `git status` command is used for showing the difference between the working directory and the index which is helpful for understanding git in-depth and also keep track of the tracked and non-tracked changes.
-
 ## Q. Define “Index”.
-Before making commits to the changes done, the developer is given provision to format and review the files and make innovations to them. All these are done in the common area which is known as `Index` or `Staging Area`.
+- Before making commits to the changes done, the developer is given provision to format and review the files and make innovations to them. All these are done in the common area which is known as `Index` or `Staging Area`.
 
 ## Q. What does git add command do?
 - This command adds files and changes to the index of the existing directory.
