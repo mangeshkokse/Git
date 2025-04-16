@@ -226,19 +226,20 @@ git commit --amend -m "New fixed message"
 
 1. git init
 Initializes a new Git repository in the current directory.
-Example: git init
-2. git clone
+
+3. git clone
 Copies a remote repository to the local machine.
-Example: git clone https://github.com/user/repo.git
-3. git status
+`git clone https://github.com/user/repo.git`
+
+5. git status
 Displays the state of the working directory and staging area.
 Example: git status
-4. git add
+6. git add
 Adds changes to the staging area.
 Example: git add file.txt
-5. git commit
+7. git commit
 Records changes to the repository.
 Example: git commit -m "Initial commit"
-6. git config
+8. git config
 Configures user settings, such as name and email.
 Example: git config --global user.name "Your Name"
