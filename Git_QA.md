@@ -1,6 +1,8 @@
-# Q. What is Git?
+# Git
 
-**Git** is a **distributed version control system (VCS)** that allows multiple developers to work on a project simultaneously while tracking and managing changes to the project's codebase. It keeps a history of all changes made to files, enabling collaboration, tracking of code versions, and easy recovery of previous states.
+## Q. What is Git?
+
+Git is a distributed version control system (VCS) that allows multiple developers to work on a project simultaneously while tracking and managing changes to the project's codebase. It keeps a history of all changes made to files, enabling collaboration, tracking of code versions, and easy recovery of previous states.
 
 ## Key Features of Git
 
